@@ -29,7 +29,7 @@ app.post('/callback', (req, res) => {
 
   const mailOptions = {
     from: 's6387651169@gmail.com',
-    to: 'st17931@gmail.com',
+    to: 'ravi@anchors.in',
     subject: 'Callback Request',
     text: emailMessage,
   };
