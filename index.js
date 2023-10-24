@@ -1,5 +1,6 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +16,8 @@ const emailConfig = {
 const transporter = nodemailer.createTransport(emailConfig);
 
 app.use(express.json());
+
+app.use(cors());
 
 app.post('/callback', (req, res) => {
   const { name, contactNumber, preferredCallbackTime, comments } = req.body;
