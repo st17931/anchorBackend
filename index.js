@@ -2,14 +2,16 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express();
+require('dotenv').config()
+
 const port = process.env.PORT || 3000;
 
 // Define your email configuration
 const emailConfig = {
   service: 'Gmail',
   auth: {
-    user: 's6387651169@gmail.com',
-    pass: 'xyui wgbh hnym jcbu',
+    user: process.env.Email,
+    pass: process.env.APP_PASS,
   },
 };
 
@@ -20,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/callback', (req, res) => {
-  const { name, contactNumber, preferredCallbackTime, comments } = req.body;
+  const { name, contactNumber, preferredCallbackTime, comments, to } = req.body;
 
   // Compose the email message
   const emailMessage = `
@@ -31,8 +33,8 @@ app.post('/callback', (req, res) => {
   `;
 
   const mailOptions = {
-    from: 's6387651169@gmail.com',
-    to: 'ravi@anchors.in',
+    from: process.env.Email,
+    to: to || "st17931@gmail.com",
     subject: 'Callback Request',
     text: emailMessage,
   };
